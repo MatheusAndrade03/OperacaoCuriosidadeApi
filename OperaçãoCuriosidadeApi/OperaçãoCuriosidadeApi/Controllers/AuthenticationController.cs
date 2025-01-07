@@ -16,6 +16,7 @@ namespace OperaçãoCuriosidadeApi.Controllers
         {
             _tokenService = tokenService;
         }
+
         [HttpPost("login",Name ="login")]
         public IActionResult Login( LoginDto? loginDto)
         {

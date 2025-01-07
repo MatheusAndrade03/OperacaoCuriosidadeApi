@@ -38,7 +38,6 @@ public class UsuariosController : ControllerBase
         catch
         {
             return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao buscar");
-
         }
     }
 
@@ -49,7 +48,6 @@ public class UsuariosController : ControllerBase
         {
             var usuario = _usuarioQuery.GetById(id);
             if (usuario is null) return NotFound("Usuario não encontrado");
-
 
             return usuario;
         }
@@ -112,7 +110,7 @@ public class UsuariosController : ControllerBase
             var usuarioDataBase = _context.Usuarios.AsNoTracking().FirstOrDefault(u => u.Id == id);
             if (usuarioDataBase is null) return BadRequest("usuario não encontrado");
 
-           
+   
             if (usuario.Senha!=usuarioDataBase.Senha)
             {
                 usuario.Senha = _securityService.HashPassword(usuario.Senha);

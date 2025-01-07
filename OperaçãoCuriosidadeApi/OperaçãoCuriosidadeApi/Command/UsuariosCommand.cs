@@ -12,10 +12,8 @@ public class UsuariosCommand
     {
         _context = context;
     }
-
     public void Create(Usuario usuario)
     {
-
         _context.Usuarios.Add(usuario);
         _context.SaveChanges();
     }
@@ -24,7 +22,6 @@ public class UsuariosCommand
         _context.Entry(usuario).State = EntityState.Modified;
         _context.SaveChanges();
     }
-
     public void Delete(int id)
     {
         var usuario = _context.Usuarios.FirstOrDefault(u => u.Id == id);

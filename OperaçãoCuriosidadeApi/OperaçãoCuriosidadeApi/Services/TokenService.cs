@@ -28,10 +28,13 @@ namespace OperaçãoCuriosidadeApi.Services
 
         public  string? GenerateToken(LoginDto login)
         {
-            
+            if (login.Email is null) return string.Empty;
 
             var usuarioDataBase = _usuariosQuery.GetByEmail(login.Email);
             if (usuarioDataBase is null) return String.Empty;
+
+            if (login.Senha is null) return string.Empty;
+            if (usuarioDataBase.Senha is null) return string.Empty;
 
             bool senhaValida = _securityService.VerifyPassword(login.Senha, usuarioDataBase.Senha);
             if (!senhaValida)
@@ -42,7 +45,6 @@ namespace OperaçãoCuriosidadeApi.Services
             var chaveSecreta = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:key"] ?? string.Empty));
             var issuer = _configuration["Jwt:Issuer"];
             var audience = _configuration["Jwt:Audience"];
-
             var signingCredentials = new SigningCredentials(chaveSecreta, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
@@ -51,9 +53,9 @@ namespace OperaçãoCuriosidadeApi.Services
                 expires: DateTime.Now.AddHours(1),
                 claims: new[]
                 {
-                    new Claim(ClaimTypes.Name, usuarioDataBase.NomeUsuario),
+                    new Claim(ClaimTypes.Name, usuarioDataBase.NomeUsuario ?? string.Empty),
                     new Claim(ClaimTypes.Role, usuarioDataBase.Admin?"Admin":"Colaborador"),
-                    new Claim(ClaimTypes.Email, usuarioDataBase.Email),
+                    new Claim(ClaimTypes.Email, usuarioDataBase.Email ?? string.Empty),
                     new Claim(ClaimTypes.NameIdentifier, usuarioDataBase.Id.ToString()),
                 },
                 signingCredentials: signingCredentials

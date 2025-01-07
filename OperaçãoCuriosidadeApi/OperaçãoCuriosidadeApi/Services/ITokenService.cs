@@ -5,8 +5,6 @@ namespace OperaçãoCuriosidadeApi.Services
 {
     public interface ITokenService
     {
-
-       
         string? GenerateToken(LoginDto loginDto);
     }
 }

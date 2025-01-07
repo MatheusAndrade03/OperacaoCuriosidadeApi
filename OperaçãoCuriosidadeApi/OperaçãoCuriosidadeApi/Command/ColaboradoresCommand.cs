@@ -13,7 +13,6 @@ public class ColaboradoresCommand
     {
         _context = context;
     }
-
     public void Create(Colaborador colaborador)
     {
         _context.Colaboradores.Add(colaborador);
@@ -24,7 +23,6 @@ public class ColaboradoresCommand
         _context.Colaboradores.Entry(colaborador).State = EntityState.Modified;
         _context.SaveChanges();
     }
-
     public void Delete(int id)
     {
         var colaborador = _context.Colaboradores.FirstOrDefault(c => c.Id == id);

@@ -15,7 +15,7 @@ builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializ
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-string conectionBD = builder.Configuration.GetConnectionString("DefaultConnection");
+string? conectionBD = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(conectionBD, ServerVersion.AutoDetect(conectionBD)));
 builder.Services.AddCors(options =>
 {
