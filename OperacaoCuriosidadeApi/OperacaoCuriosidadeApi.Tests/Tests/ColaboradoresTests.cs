@@ -38,7 +38,7 @@ namespace OperacaoCuriosidadeApi.Tests.Tests
             var response = await _client.PostAsJsonAsync("/api/colaboradores", novoColaborador);
 
             // Assert
-            response.EnsureSuccessStatusCode(); // Deve retornar 201 Created
+            response.EnsureSuccessStatusCode();
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
         }
 
@@ -70,7 +70,7 @@ namespace OperacaoCuriosidadeApi.Tests.Tests
             var deleteResponse = await _client.DeleteAsync($"/api/colaboradores/{idCriado}");
 
             // Assert
-            deleteResponse.EnsureSuccessStatusCode(); // Deve retornar 200 OK
+            deleteResponse.EnsureSuccessStatusCode(); 
             deleteResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         }
     }

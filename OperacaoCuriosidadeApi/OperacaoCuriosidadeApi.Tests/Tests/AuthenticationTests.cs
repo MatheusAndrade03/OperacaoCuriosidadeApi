@@ -26,7 +26,7 @@ namespace OperacaoCuriosidadeApi.Tests
             var login = new LoginDto
             {
                 Email = "admin@teste.com",
-                Senha = "123456" // Essa senha foi hasheada na CustomWebApplicationFactory
+                Senha = "123456" 
             };
 
             // Act

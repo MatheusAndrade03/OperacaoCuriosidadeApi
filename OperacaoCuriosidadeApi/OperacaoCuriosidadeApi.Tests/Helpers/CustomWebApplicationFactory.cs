@@ -19,7 +19,7 @@ namespace OperacaoCuriosidadeApi.Tests.Helpers
         {
             builder.ConfigureServices(services =>
             {
-                // 🔄 Remover contexto original (MySQL, etc.)
+                //Remover contexto original
                 var descriptor = services.SingleOrDefault(
                     d => d.ServiceType == typeof(DbContextOptions<AppDbContext>));
                 if (descriptor != null)
@@ -27,7 +27,7 @@ namespace OperacaoCuriosidadeApi.Tests.Helpers
                     services.Remove(descriptor);
                 }
 
-                // 📦 Criar banco SQLite em memória
+                //Criar banco SQLite em memória
                 _connection = new SqliteConnection("DataSource=:memory:");
                 _connection.Open();
 
@@ -36,13 +36,13 @@ namespace OperacaoCuriosidadeApi.Tests.Helpers
                     options.UseSqlite(_connection);
                 });
 
-                // 🔄 Reconstruir os serviços
+                //Reconstruir os serviços
                 var sp = services.BuildServiceProvider();
                 using var scope = sp.CreateScope();
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 var securityService = scope.ServiceProvider.GetRequiredService<ISecurityService>();
 
-                // 💾 Criar banco e dados de teste
+                // Criar banco e dados de teste
                 db.Database.EnsureCreated();
 
                 var senhaHash = securityService.HashPassword("123456");

@@ -42,7 +42,7 @@ namespace OperacaoCuriosidadeApi.Tests
         [Fact]
         public async Task Deve_Deletar_Usuario_Com_Sucesso()
         {
-            // Primeiro cria um usuário para deletar
+           
             var usuarioParaDeletar = new Usuario
             {
                 NomeUsuario = "Deletar Usuario",
